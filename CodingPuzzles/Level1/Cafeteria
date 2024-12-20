@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+// Write any include statements here
+
+long long getMaxAdditionalDinersCount(long long N, long long K, int M, vector<long long> S) {
+  // Write your code here
+  // N is number of seats in a row
+  // K is the social distance to satisfy
+  // M people are sitting at S already.
+  
+  //S needs to be sorted first
+  sort(S.begin(), S.end());
+  
+  //can there be people sitting before the S element?
+  //how many people can fit before S[i]?
+  //starting from 0, or the last S[i], how many K can fit?
+  //for example S= [4,7] K = 2, N=10
+  // 1,4,7,9
+  //previous = 1
+  //current = 4
+  
+  long long count = 0;
+  
+  if (!S.empty()) {
+        long long firstSeat = S[0];
+        count += (firstSeat - 1) / (K + 1);
+  } else {
+        // If no seats are occupied, fill the entire row
+        return N / (K + 1);
+  }
+  // Handle spaces between occupied seats
+  for (int i = 1; i < M; i++) {
+      long long prevSeat = S[i - 1];
+      long long currentSeat = S[i];
+      long long gap = currentSeat - prevSeat - 1; // Space between two occupied seats
+
+      if (gap > K) {
+          count += (gap - K) / (K + 1); // Fit diners in the gap with spacing
+      }
+  }
+
+  // Handle the space after the last occupied seat
+  long long lastSeat = S[M - 1];
+  count += (N - lastSeat) / (K + 1);
+
+  return count;
+}

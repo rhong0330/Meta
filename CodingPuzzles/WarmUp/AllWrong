@@ -1,0 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+// Write any include statements here
+
+string getWrongAnswers(int N, string C) {
+  // Write your code here
+  for (auto& character : C) {
+    if (character == 'A') character = 'B';
+    else if (character == 'B') character = 'A';
+  }
+  return C;
+}

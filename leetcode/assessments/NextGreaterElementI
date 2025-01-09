@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> result;
+        
+        for (int item : nums1) {
+            bool found = false;
+            int foundNumber = -1;
+            for (int i = 0; i< nums2.size(); i++) {
+                if (foundNumber > -1) {
+                    if (nums2[i] > foundNumber) {
+                        result.push_back(nums2[i]);
+                        found = true;
+                        break;
+                    }
+                }
+                if (item == nums2[i]){
+                    foundNumber = nums2[i];
+                }
+            }
+            if (!found) result.push_back(-1);
+        }
+        
+        return result;
+    }
+};

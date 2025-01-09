@@ -1,0 +1,28 @@
+class Solution {
+    
+private:
+    map<int, int> tracker;
+public:
+    
+    void insert(vector<int>& arr){
+        for (int num : arr){
+            tracker[num]++;
+        }
+    }
+    
+    vector<int> getResult () {
+        vector<int> result;
+        for (auto& item : tracker) {
+            if (item.second == 3) result.push_back(item.first);
+        }
+        return result;
+    }
+    
+    vector<int> arraysIntersection(vector<int>& arr1, vector<int>& arr2, vector<int>& arr3) {
+        insert(arr1);
+        insert(arr2);
+        insert(arr3);
+        
+        return getResult();
+    }
+};

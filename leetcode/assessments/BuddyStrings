@@ -1,0 +1,43 @@
+class Solution {
+public:
+    
+    bool containsSameChar(string& s) {
+        unordered_map<char,int> dictionary;
+        for (auto c : s){
+            dictionary[c]++;
+        }
+        for (auto item : dictionary){
+            if (item.second > 1) return true;
+        }
+        return false;
+    }
+    
+    bool buddyStrings(string s, string goal) {
+        if (s == goal){
+            return containsSameChar(s);
+        } else {
+            bool found = false;
+            int index = 0;
+            int count = 0;
+            if (s.size() != goal.size()){
+                return false;
+            }
+            for (int i = 0; i < s.size(); i++){
+                if (s[i] != goal[i]){
+                    cout << i << index << found << endl;
+                    if (found){
+                        if (s[index] != goal[i] || s[i] != goal[index]){
+                            return false;
+                        }
+                    }
+                    index = i;
+                    found = true;
+                    count++;
+                    if (count > 2) return false;
+                }
+            }
+            if (count == 2) return true;
+            return false;
+        }
+    }
+};

@@ -1,0 +1,38 @@
+class Solution {
+public:
+
+    void sortDiagonal(int row, int col, vector<vector<int>>& mat){
+        priority_queue<int, vector<int>, greater<int>> minHeap;
+        // Traverse the diagonal and add elements to the minHeap
+        int r = row, c = col;
+
+        while(r < mat.size() && c < mat[0].size()){
+            minHeap.push(mat[r][c]);
+            r++;
+            c++;
+        }
+
+        r= row;
+        c= col;
+        while(r < mat.size() && c < mat[0].size()){
+            mat[r][c] = minHeap.top();
+            minHeap.pop();
+            r++;
+            c++;
+        }
+    }
+
+    vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+        int row = mat.size();
+        int col = mat[0].size();
+
+        for (int i = 0; i < row; i++){
+            sortDiagonal(i, 0, mat);
+        }
+
+        for (int i = 0; i < col; i++){
+            sortDiagonal(0, i, mat);
+        }
+        return mat;
+    }
+};

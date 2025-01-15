@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int minTimeToVisitAllPoints(vector<vector<int>>& points) {
+        if(points.size() < 2){
+            return 0;
+        }
+        int seconds = 0;
+        for (int i=0; i< points.size() -1; i++) {
+            vector<int> pointA = points[i];
+            int xA = pointA[0];
+            int yA = pointA[1];
+            vector<int> pointB = points[i+1];
+            int xB = pointB[0];
+            int yB = pointB[1];
+            
+            int xDiff = abs(xA - xB); //3
+            int yDiff = abs(yA - yB); //5
+
+            if (xDiff == 0){
+                seconds += yDiff;
+            } else if (yDiff == 0){
+                seconds += xDiff;
+            } else if (xDiff > yDiff){
+                seconds += xDiff;
+            } else {
+                seconds += yDiff;
+            }      
+        }
+        return seconds;
+    }
+};

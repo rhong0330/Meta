@@ -1,0 +1,40 @@
+class Solution {
+public:
+    string simplifyPath(string path) {
+        vector<string> paths;
+        string directory = "";
+        for (int i=0; i < path.size(); i++) {
+            if (path[i] == '/') {
+                if (directory == ".") {                    
+                } else if (directory == "..") {
+                    if (paths.size() > 0) {
+                        paths.pop_back();
+                    }
+                } else if (directory != "") {
+                    paths.push_back(directory);
+                }
+                directory = "";
+            } else {
+                directory += path[i];
+            }
+        }
+        if (directory == ".") {                    
+        } else if (directory == "..") {
+            if (paths.size() > 0) {
+                paths.pop_back();
+            }
+        } else if (directory != "") {
+            paths.push_back(directory);
+        }
+        
+        if (paths.empty()) {
+            return "/";
+        }
+        string result = "";
+        for (int i = 0; i < paths.size(); i++){
+            result += "/";
+            result += paths[i];
+        }
+        return result;
+    }
+};

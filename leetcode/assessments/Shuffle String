@@ -1,0 +1,18 @@
+class Solution {
+public:
+    string restoreString(string s, vector<int>& indices) {
+        map <int, char> hash;
+        string result;
+        int i = 0;
+        for (auto& index : indices) {
+            hash[index] = s[i++];
+        }
+        
+        
+        
+        for (auto& item : hash) {
+            result += item.second;
+        }
+        return result;
+    }
+};

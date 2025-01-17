@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int maxSubArrayLen(vector<int>& nums, int k) {
+        long long prefixSum = 0;
+        unordered_map <long long, int> prefixMap;
+        int result = 0;
+        for (int i = 0; i< nums.size(); i++){
+            prefixSum += nums[i];
+            if (prefixSum == k){
+                result = max(result, i+1);
+            }
+            
+            if (prefixMap.find(prefixSum - k) != prefixMap.end()){
+                result = max(result, i - prefixMap[prefixSum-k]);
+            }
+            
+            if (prefixMap.find(prefixSum) == prefixMap.end()) {
+                prefixMap[prefixSum] = i;
+            }
+        }
+        return result;
+    }
+};

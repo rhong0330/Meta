@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int tribonacci(int n) {
+        vector<int> threeInts = {0,1,1};
+        
+        for (int i = 3; i <= n; i++) {
+            int sum = threeInts[0] + threeInts[1] + threeInts[2];
+            threeInts[i%3] = sum;
+        }
+        return threeInts[n%3];
+    }
+};

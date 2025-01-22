@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        int n1 = s1.size();
+        int n2 = s2.size();
+
+        if (n1 > n2) {
+            return false; // s1 cannot be a substring of s2 if it's longer
+        }
+
+        // Frequency count of characters in s1
+        vector<int> s1Count(26, 0);
+        for (char c : s1) {
+            s1Count[c - 'a']++;
+        }
+
+        // Sliding window for s2
+        vector<int> windowCount(26, 0);
+        for (int i = 0; i < n2; i++) {
+            // Add the current character to the window
+            windowCount[s2[i] - 'a']++;
+
+            // Remove the character that is out of the window's size
+            if (i >= n1) {
+                windowCount[s2[i - n1] - 'a']--;
+            }
+
+            // Compare the counts
+            if (windowCount == s1Count) {
+                return true; // Found a valid permutation
+            }
+        }
+
+        return false; // No permutation found
+    }
+};

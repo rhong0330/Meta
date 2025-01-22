@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool isAlienSorted(vector<string>& words, string order) {
+        unordered_map<char,int> priorityTable;
+        int priority = 1; 
+        for (auto& character: order) {
+            priorityTable[character] = priority++;
+        }
+        for (int i = 0; i < words.size() - 1; i++){
+            int firstSize = words[i].size();
+            int secondSize = words[i+1].size();
+            bool pass = false;
+            for (int j = 0; j < firstSize; j++){
+                if (priorityTable[words[i][j]] < priorityTable[words[i+1][j]] ) {
+                    pass = true;
+                    break;
+                } else if (j >= secondSize || priorityTable[words[i][j]] > priorityTable[words[i+1][j]]) {
+                    return false;
+                }
+            }
+            // if (pass) {
+            //     continue;
+            // } else {
+            //     return false;
+            // }
+        }
+        
+        return true;
+    }
+};
